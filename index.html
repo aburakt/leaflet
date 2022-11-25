@@ -7,12 +7,6 @@
 
     <title>Leaflet Map Demo</title>
 
-    <!-- <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="docs/images/favicon.ico"
-    /> -->
-
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -24,7 +18,6 @@
       integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
       crossorigin=""
     ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <style>
       html,
@@ -41,7 +34,7 @@
       #hello {
         background-color: #f0f0f0;
         border-radius: 10%;
-        padding: 0.01rem;
+        padding: 0.5rem;
         width: 150px;
         text-align: center;
         display: none;
@@ -118,21 +111,5 @@
 
       //   map.on('click', onMapClick)
     </script>
-
-    <!-- <script>
-      $(document).ready(function () {
-        $(map).click(function (e) {
-          $('#hello')
-            .show()
-            .text('At location - X: ' + e.latlng + ' Y:' + e.pageY)
-            .css({
-              position: 'absolute',
-              color: '#fff',
-              left: e.pageX,
-              top: e.pageY
-            })
-        })
-      })
-    </script> -->
   </body>
 </html>
