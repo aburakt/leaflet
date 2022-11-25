@@ -35,7 +35,7 @@
         background-color: #f0f0f0;
         border-radius: 10%;
         padding: 0.5rem;
-        width: 150px;
+        width: auto;
         text-align: center;
         display: none;
         left: var(--mouse-x);
@@ -44,9 +44,9 @@
     </style>
   </head>
   <body>
-    <div id="map" style="width: 100%; height: 100%"></div>
-    <div id="hello" style="width: auto; display: none">
-      <h6 id="hi">Hello World</h6>
+    <div id="map"></div>
+    <div id="hello">
+      <h6>Hello World</h6>
     </div>
     <script>
       // map settings
@@ -63,8 +63,7 @@
       ).addTo(map)
 
       let mouseClick = document.documentElement
-
-      mouseClick.addEventListener('mouseup', (e) => {
+      mouseClick.addEventListener('click', (e) => {
         mouseClick.style.setProperty('--mouse-x', e.clientX + 'px')
         mouseClick.style.setProperty('--mouse-y', e.clientY + 'px')
       })
@@ -85,12 +84,7 @@
               hello.style.display = 'block'
               let hi = document.getElementById('hello')
               hi.innerHTML = `<b>Merhaba, burası</b><br />enlem: ${lat} - boylam: ${lon}`
-              hi.classList.add(
-                'leaflet-pane',
-                'leaflet-popup-pane',
-                'leaflet-popup',
-                'leaflet-zoom-animated'
-              )
+              hi.classList.add('leaflet-popup-pane', 'leaflet-popup')
             }
           })
         }
