@@ -1,11 +1,5 @@
 // map settings
 const map = L.map('map').setView([38.2, 34.6], 0)
-const mapClick = document.querySelector('#map')
-
-// map mouseClick
-mapClick.addEventListener('click', (e) => {
-  console.log('you clicked mouse')
-})
 
 const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 14,
