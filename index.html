@@ -62,11 +62,11 @@
         }
       ).addTo(map)
 
-      let mClick = document.documentElement
+      let mouseClick = document.documentElement
 
-      mClick.addEventListener('mouseup', (e) => {
-        mClick.style.setProperty('--mouse-x', e.clientX + 'px')
-        mClick.style.setProperty('--mouse-y', e.clientY + 'px')
+      mouseClick.addEventListener('mouseup', (e) => {
+        mouseClick.style.setProperty('--mouse-x', e.clientX + 'px')
+        mouseClick.style.setProperty('--mouse-y', e.clientY + 'px')
       })
 
       // random markers
