@@ -1,109 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <base target="_top" />
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<head>
+		<base target="_top" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Leaflet Map Demo</title>
 
-    <title>Leaflet Map Demo</title>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="//fonts.googleapis.com/css?family=Open+Sans"
+		/>
+		<!-- Leaflet CSS -->
+		<link
+			rel="stylesheet"
+			href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+			integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+			crossorigin=""
+		/>
+		<!-- Leaflet JS -->
+		<script
+			src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+			integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+			crossorigin=""
+		></script>
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-      crossorigin=""
-    />
-    <script
-      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-      crossorigin=""
-    ></script>
+		<style>
+			html,
+			body {
+				height: 100%;
+				margin: 0;
+				font-family: "Open Sans";
+				font-size: 14px;
+			}
 
-    <style>
-      html,
-      body {
-        height: 100%;
-        margin: 0;
-      }
-      .leaflet-container {
-        height: 100%;
-        width: 100%;
-        max-width: 100%;
-        max-height: 100%;
-      }
-      #hello {
-        background-color: #f0f0f0;
-        border-radius: 10%;
-        padding: 0.5rem;
-        width: auto;
-        text-align: center;
-        display: none;
-        left: var(--mouse-x);
-        top: var(--mouse-y);
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-    <div id="hello">
-      <h6>Hello World</h6>
-    </div>
-    <script>
-      // map settings
-      const map = L.map('map').setView([38.2, 34.6], 0)
+			.leaflet-container {
+				height: 100%;
+				width: 100%;
+				max-width: 100%;
+				max-height: 100%;
+			}
+			/* popup div */
+			#hello {
+				background-color: #f0f0f0;
 
-      const tiles = L.tileLayer(
-        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-        {
-          maxZoom: 14,
-          minZoom: 6,
-          attribution:
-            '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }
-      ).addTo(map)
+				border: 1px solid #2a81ca;
+				border-radius: 5px 15px;
+				padding: 0.5rem;
+				width: auto;
+				text-align: center;
+				display: none;
+				left: var(--mouse-x);
+				top: var(--mouse-y);
+				box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.3),
+					0px 3px 4px 0px rgba(0, 0, 0, 0.34),
+					0px 1px 8px 0px rgba(0, 0, 0, 0.42);
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Leaflet main div -->
+		<div id="map"></div>
+		<!-- Popup div -->
+		<div id="hello">
+			<span>Hello World</span>
+		</div>
+		<script>
+			// map settings
+			const map = L.map("map").setView([38.2, 34.6], 0);
 
-      let mouseClick = document.documentElement
-      mouseClick.addEventListener('click', (e) => {
-        mouseClick.style.setProperty('--mouse-x', e.clientX + 'px')
-        mouseClick.style.setProperty('--mouse-y', e.clientY + 'px')
-      })
+			const tiles = L.tileLayer(
+				"https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+				{
+					maxZoom: 14,
+					minZoom: 6,
+					attribution:
+						'&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+				}
+			).addTo(map);
 
-      // random markers
-      function RandomMarker(number) {
-        for (let i = 0; i < number; i++) {
-          const lat = Math.floor(Math.random() * (4100 - 3700) + 3700) / 100
-          const lon = Math.floor(Math.random() * (4300 - 2700) + 2700) / 100
-          console.log('Boylam:', lat, '| Enlem:', lon)
+			// popup div location
+			let mc = document.documentElement;
+			mc.addEventListener("click", (e) => {
+				mc.style.setProperty("--mouse-x", e.clientX + "px");
+				mc.style.setProperty("--mouse-y", e.clientY + "px");
+			});
 
-          const marker = L.marker([lat, lon]).addTo(map)
+			// random markers
+			function RandomMarker(number) {
+				for (let i = 0; i < number; i++) {
+					// random markers created
+					const lat = Math.floor(Math.random() * (4100 - 3700) + 3700) / 100;
+					const lon = Math.floor(Math.random() * (4300 - 2700) + 2700) / 100;
+					console.log("Boylam:", lat, "| Enlem:", lon);
+					// marker added
+					const marker = L.marker([lat, lon]).addTo(map);
+					// marker popup
+					marker.on("click", function clickInfo(click) {
+						const hi = document.getElementById("hello");
 
-          marker.on('click', function clickInfo() {
-            if (hello.style.display === 'block') {
-              hello.style.display = 'none'
-            } else {
-              hello.style.display = 'block'
-              let hi = document.getElementById('hello')
-              hi.innerHTML = `<b>Merhaba, burası</b><br />enlem: ${lat} - boylam: ${lon}`
-              hi.classList.add('leaflet-popup-pane', 'leaflet-popup')
-            }
-          })
-        }
-      }
-      RandomMarker(25)
+						if (hi.style.display === "block") {
+							hi.style.display = "none";
+						} else {
+							hi.style.display = "block";
+							hi.innerHTML = `Merhaba, burası<br />${lat} enlem, ${lon} boylam`;
+							hi.classList.add("leaflet-popup-pane", "leaflet-popup");
+						}
+					});
+				}
+			}
+			RandomMarker(25);
 
-      //   const popup = L.popup()
-      //     .setLatLng([38, 34])
-      //     .setContent('I am a standalone popup.')
-      //     .openOn(map)
+			// Leaflet popup
+			//   const popup = L.popup()
+			//     .setLatLng([38, 34])
+			//     .setContent('I am a standalone popup.')
+			//     .openOn(map)
 
-      //   function onMapClick(e) {
-      //     popup
-      //       .setLatLng(e.latlng)
-      //       .setContent(`You clicked the map at ${e.latlng.toString()}`)
-      //       .openOn(map)
-      //   }
+			//   function onMapClick(e) {
+			//     popup
+			//       .setLatLng(e.latlng)
+			//       .setContent(`You clicked the map at ${e.latlng.toString()}`)
+			//       .openOn(map)
+			//   }
 
-      //   map.on('click', onMapClick)
-    </script>
-  </body>
+			//   map.on('click', onMapClick)
+		</script>
+	</body>
 </html>
