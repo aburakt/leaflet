@@ -25,7 +25,7 @@ function RandomMarker(number) {
 		// marker added
 		const marker = L.marker([lat, lon]).addTo(map);
 		// marker popup
-		marker.on("click", function clickInfo(click) {
+		marker.on("click", () => {
 			const popup = document.getElementById("popup");
 
 			if (popup.style.display === "block") {
