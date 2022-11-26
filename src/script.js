@@ -21,19 +21,19 @@ function RandomMarker(number) {
 		// random markers created
 		const lat = Math.floor(Math.random() * (4100 - 3700) + 3700) / 100;
 		const lon = Math.floor(Math.random() * (4300 - 2700) + 2700) / 100;
-		console.log("Boylam:", lat, "| Enlem:", lon);
+		console.log("Enlem:", lat, " | ", "Boylam:", lon);
 		// marker added
 		const marker = L.marker([lat, lon]).addTo(map);
 		// marker popup
 		marker.on("click", function clickInfo(click) {
-			const hi = document.getElementById("hello");
+			const popup = document.getElementById("popup");
 
-			if (hi.style.display === "block") {
-				hi.style.display = "none";
+			if (popup.style.display === "block") {
+				popup.style.display = "none";
 			} else {
-				hi.style.display = "block";
-				hi.innerHTML = `Merhaba, burası<br />${lat} enlem, ${lon} boylam`;
-				hi.classList.add("leaflet-popup-pane", "leaflet-popup");
+				popup.style.display = "block";
+				popup.innerHTML = `Merhaba, burası<br />${lat} enlem, ${lon} boylam`;
+				popup.classList.add("leaflet-popup-pane", "leaflet-popup");
 			}
 		});
 	}
